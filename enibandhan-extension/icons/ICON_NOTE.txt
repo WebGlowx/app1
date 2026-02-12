@@ -1,0 +1,21 @@
+📌 ICON PLACEHOLDER NOTE
+
+The extension currently uses SVG placeholders for icons.
+
+For production, you should replace these with proper PNG icons:
+- icon16.png (16x16 pixels)
+- icon48.png (48x48 pixels)
+- icon128.png (128x128 pixels)
+
+Quick Ways to Create Icons:
+1. Use an online generator: https://favicon.io/favicon-generator/
+2. Design in Canva: https://www.canva.com/
+3. Use a design tool like Figma or Adobe Illustrator
+
+Suggested Style:
+- Colors: Blue (#667eea) and Purple (#764ba2) gradient
+- Symbol: Letter "E" or shield with document
+- Professional and trustworthy appearance
+
+The manifest.json is already configured to use these icon files,
+so just replace the SVG files with PNG files of the same names.

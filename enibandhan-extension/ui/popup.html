@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enibandhan Extension</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      width: 400px;
+      min-height: 500px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      padding: 0;
+    }
+    
+    .header {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .header h1 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    .header p {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+    
+    .content {
+      padding: 20px;
+    }
+    
+    .status-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .status-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      opacity: 0.9;
+    }
+    
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .stat-row:last-child {
+      border-bottom: none;
+    }
+    
+    .stat-label {
+      font-size: 13px;
+      opacity: 0.8;
+    }
+    
+    .stat-value {
+      font-size: 15px;
+      font-weight: 600;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    
+    .badge.online {
+      background: #10b981;
+    }
+    
+    .badge.offline {
+      background: #ef4444;
+    }
+    
+    .badge.pending {
+      background: #f59e0b;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 10px;
+    }
+    
+    .btn-primary {
+      background: #fff;
+      color: #667eea;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 30px;
+      opacity: 0.8;
+    }
+    
+    .spinner {
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top: 3px solid #fff;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🛡️ Enibandhan</h1>
+    <p>Secure Data Capture & Sync</p>
+  </div>
+  
+  <div class="content">
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <p>Loading status...</p>
+    </div>
+    
+    <div id="main-content" style="display: none;">
+      <!-- Sync Status -->
+      <div class="status-card">
+        <h3>🔄 Sync Status</h3>
+        <div class="stat-row">
+          <span class="stat-label">Index Records</span>
+          <span class="stat-value" id="index-pending">-</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Master Records</span>
+          <span class="stat-value" id="master-pending">-</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Next Sync</span>
+          <span class="stat-value" id="next-sync">-</span>
+        </div>
+      </div>
+      
+      <!-- Server Status -->
+      <div class="status-card">
+        <h3>🌐 Servers</h3>
+        <div class="stat-row">
+          <span class="stat-label">Server 1 (Master)</span>
+          <span id="server1-status">-</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Server 2 (Index)</span>
+          <span id="server2-status">-</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Server 3 (Proxy)</span>
+          <span id="server3-status">-</span>
+        </div>
+      </div>
+      
+      <!-- Actions -->
+      <button class="btn btn-primary" id="manual-sync">Manual Sync Now</button>
+      <button class="btn btn-secondary" id="open-settings">Settings</button>
+    </div>
+  </div>
+  
+  <script src="popup.js" type="module"></script>
+</body>
+</html>

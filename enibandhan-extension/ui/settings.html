@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enibandhan Extension - Settings</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      padding: 30px;
+      text-align: center;
+    }
+    
+    .header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .header p {
+      opacity: 0.9;
+      font-size: 14px;
+    }
+    
+    .content {
+      padding: 40px;
+    }
+    
+    .form-group {
+      margin-bottom: 28px;
+    }
+    
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    
+    .form-group .hint {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    
+    .form-group input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    }
+    
+    .btn-secondary {
+      background: #f3f4f6;
+      color: #667;
+    }
+    
+    .btn-secondary:hover {
+      background: #e5e7eb;
+    }
+    
+    .alert {
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      display: none;
+    }
+    
+    .alert.success {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #6ee7b7;
+    }
+    
+    .alert.error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+    }
+    
+    .divider {
+      height: 1px;
+      background: #e5e7eb;
+      margin: 30px 0;
+    }
+    
+    .info-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 20px;
+    }
+    
+    .info-box h3 {
+      font-size: 14px;
+      color: #1e40af;
+      margin-bottom: 8px;
+    }
+    
+    .info-box p {
+      font-size: 13px;
+      color: #1e40af;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>⚙️ Settings</h1>
+      <p>Configure your Netlify server endpoints</p>
+    </div>
+    
+    <div class="content">
+      <div id="alert" class="alert"></div>
+      
+      <form id="settings-form">
+        <!-- Server 1 -->
+        <div class="form-group">
+          <label for="server1Url">🔐 Server 1 - Master (Security & Encryption)</label>
+          <input 
+            type="url" 
+            id="server1Url" 
+            placeholder="https://your-server-1.netlify.app/.netlify/functions/master-handler"
+            required
+          >
+          <p class="hint">Handles encryption keys and master data storage</p>
+        </div>
+        
+        <!-- Server 2 -->
+        <div class="form-group">
+          <label for="server2Url">📁 Server 2 - Index (Sync Manager)</label>
+          <input 
+            type="url" 
+            id="server2Url" 
+            placeholder="https://your-server-2.netlify.app/.netlify/functions/index-handler"
+            required
+          >
+          <p class="hint">Manages index data synchronization</p>
+        </div>
+        
+        <!-- Server 3 -->
+        <div class="form-group">
+          <label for="server3Url">🔍 Server 3 - Proxy (Conflict Checker)</label>
+          <input 
+            type="url" 
+            id="server3Url" 
+            placeholder="https://your-server-3.netlify.app/.netlify/functions/conflict-proxy"
+            required
+          >
+          <p class="hint">Provides real-time conflict detection</p>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <button type="submit" class="btn btn-primary">Save Settings</button>
+        <button type="button" id="test-connection" class="btn btn-secondary">Test Connection</button>
+      </form>
+      
+      <div class="info-box">
+        <h3>💡 Quick Setup Guide</h3>
+        <p>
+          1. Deploy each Netlify function from the project folders<br>
+          2. Copy the function URLs from Netlify dashboard<br>
+          3. Paste them in the fields above<br>
+          4. Click "Test Connection" to verify
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <script src="settings.js" type="module"></script>
+</body>
+</html>

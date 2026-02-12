@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Enibandhan Extension",
+  "version": "1.0.0",
+  "description": "Secure data capture, indexing, and conflict detection for Enibandhan Bihar Portal",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "tabs",
+    "alarms"
+  ],
+  "host_permissions": [
+    "https://enibandhan.bihar.gov.in/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://enibandhan.bihar.gov.in/digitize/*",
+        "https://enibandhan.bihar.gov.in/digitization/*"
+      ],
+      "js": ["content-scripts/scraper.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

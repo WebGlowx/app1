@@ -1,0 +1,16 @@
+{
+  "name": "enibandhan-extension",
+  "version": "1.0.0",
+  "description": "Chrome Extension for Enibandhan Bihar Portal",
+  "type": "module",
+  "scripts": {
+    "build": "echo 'Extension ready for loading'",
+    "pack": "zip -r enibandhan-extension.zip . -x '*.git*' 'node_modules/*' 'package*.json'"
+  },
+  "dependencies": {
+    "crypto-js": "^4.2.0"
+  },
+  "devDependencies": {},
+  "author": "Enibandhan Team",
+  "license": "MIT"
+}
