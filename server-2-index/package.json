@@ -1,0 +1,14 @@
+{
+  "name": "server-2-index",
+  "version": "1.0.0",
+  "description": "Netlify Function for Enibandhan Index Data Handler",
+  "main": "netlify/functions/index-handler.js",
+  "scripts": {
+    "test": "echo \"No tests configured\""
+  },
+  "dependencies": {
+    "@octokit/rest": "^19.0.13"
+  },
+  "author": "Enibandhan Team",
+  "license": "MIT"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "server-1-master",
+  "version": "1.0.0",
+  "description": "Netlify Function for Enibandhan Master Data Handler",
+  "main": "netlify/functions/master-handler.js",
+  "scripts": {
+    "test": "echo \"No tests configured\""
+  },
+  "dependencies": {
+    "@octokit/rest": "^19.0.13",
+    "crypto-js": "^4.2.0"
+  },
+  "author": "Enibandhan Team",
+  "license": "MIT"
+}
